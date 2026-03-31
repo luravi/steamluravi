@@ -1,0 +1,1391 @@
+<!DOCTYPE html><html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STEAMLURAVI</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: rgba(15, 23, 42, 0.88);
+      --panel-2: rgba(30, 41, 59, 0.92);
+      --card: rgba(255,255,255,0.06);
+      --line: rgba(255,255,255,0.12);
+      --text: #e5eefb;
+      --muted: #a9b7cf;
+      --accent: #67e8f9;
+      --accent-2: #f59e0b;
+      --accent-3: #a78bfa;
+      --ok: #22c55e;
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --radius: 24px;
+    }* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(103, 232, 249, .16), transparent 28%),
+    radial-gradient(circle at top right, rgba(167, 139, 250, .14), transparent 24%),
+    linear-gradient(180deg, #020617 0%, #0f172a 50%, #111827 100%);
+  min-height: 100vh;
+}
+
+.shell {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 800;
+  letter-spacing: .02em;
+}
+
+.brand-badge {
+  width: 52px;
+  height: 52px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--accent), var(--accent-3));
+  color: #08111d;
+  font-size: 1.2rem;
+  box-shadow: var(--shadow);
+}
+
+.brand small {
+  display: block;
+  color: var(--muted);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255,255,255,.04);
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--ok);
+  border-radius: 50%;
+  box-shadow: 0 0 0 6px rgba(34,197,94,.14);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+}
+
+.hero-copy {
+  padding: 36px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(245, 158, 11, .12);
+  border: 1px solid rgba(245, 158, 11, .28);
+  color: #fde68a;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+h1 {
+  margin: 0 0 14px;
+  font-size: clamp(2.2rem, 4vw, 4rem);
+  line-height: 1.03;
+  letter-spacing: -.03em;
+}
+
+.hero-copy p {
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.7;
+  margin: 0 0 24px;
+  max-width: 62ch;
+}
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.btn {
+  border: 0;
+  border-radius: 16px;
+  padding: 14px 18px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform .15s ease, opacity .15s ease, box-shadow .15s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn:hover { transform: translateY(-1px); }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-3));
+  color: #08111d;
+  box-shadow: 0 12px 32px rgba(103,232,249,.18);
+}
+
+.btn-secondary {
+  background: rgba(255,255,255,.06);
+  border: 1px solid var(--line);
+  color: var(--text);
+}
+
+.mini-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.mini-card {
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.04);
+}
+
+.mini-card strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: .98rem;
+}
+
+.mini-card span {
+  color: var(--muted);
+  font-size: .92rem;
+  line-height: 1.5;
+}
+
+.hero-visual {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+}
+
+.glass-card {
+  border-radius: 22px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  background: var(--panel-2);
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-weight: 800;
+}
+
+.tag {
+  font-size: .78rem;
+  color: #dbeafe;
+  background: rgba(103,232,249,.14);
+  border: 1px solid rgba(103,232,249,.24);
+  padding: 6px 10px;
+  border-radius: 999px;
+}
+
+.feature-list {
+  display: grid;
+  gap: 10px;
+}
+
+.feature-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.feature-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  background: rgba(255,255,255,.08);
+  color: white;
+  font-size: .95rem;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 24px;
+}
+
+.sidebar {
+  padding: 22px;
+  align-self: start;
+  position: sticky;
+  top: 24px;
+}
+
+.sidebar h3,
+.chat-wrap h3 {
+  margin: 0 0 14px;
+  font-size: 1.15rem;
+}
+
+.settings-group {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+label {
+  font-size: .9rem;
+  font-weight: 700;
+  color: #dbeafe;
+  display: block;
+  margin-bottom: 8px;
+}
+
+input, textarea, select {
+  width: 100%;
+  background: rgba(255,255,255,.05);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px 14px;
+  font: inherit;
+  outline: none;
+}
+
+textarea { min-height: 96px; resize: vertical; }
+
+.hint {
+  color: var(--muted);
+  font-size: .84rem;
+  line-height: 1.45;
+  margin-top: 6px;
+}
+
+.code-chip {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 10px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid var(--line);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .82rem;
+  color: #c7d2fe;
+}
+
+.chat-wrap {
+  padding: 22px;
+  min-height: 720px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.chat-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(103,232,249,.25), rgba(167,139,250,.25));
+  border: 1px solid rgba(255,255,255,.14);
+  font-size: 1.1rem;
+  font-weight: 900;
+}
+
+.chat-title p {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: .92rem;
+}
+
+.messages {
+  flex: 1;
+  display: grid;
+  gap: 14px;
+  align-content: start;
+  padding-right: 4px;
+  overflow: auto;
+  min-height: 460px;
+}
+
+.message {
+  max-width: 82%;
+  padding: 14px 16px;
+  border-radius: 18px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  box-shadow: 0 10px 24px rgba(0,0,0,.16);
+}
+
+.message.user {
+  margin-left: auto;
+  background: linear-gradient(135deg, rgba(103,232,249,.18), rgba(167,139,250,.18));
+  border: 1px solid rgba(103,232,249,.22);
+}
+
+.message.bot {
+  background: rgba(255,255,255,.05);
+  border: 1px solid var(--line);
+}
+
+.composer {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+}
+
+.composer textarea {
+  min-height: 74px;
+}
+
+.footer-note {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: .85rem;
+  line-height: 1.55;
+}
+
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.pill {
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.04);
+  color: var(--muted);
+  font-size: .86rem;
+  cursor: pointer;
+}
+
+.pill:hover { color: var(--text); border-color: rgba(255,255,255,.2); }
+
+@media (max-width: 1100px) {
+  .hero, .layout { grid-template-columns: 1fr; }
+  .sidebar { position: static; }
+}
+
+@media (max-width: 720px) {
+  .shell { padding: 16px; }
+  .hero-copy, .chat-wrap, .sidebar { padding: 18px; }
+  .mini-grid { grid-template-columns: 1fr; }
+  .message { max-width: 100%; }
+  .composer { grid-template-columns: 1fr; }
+  .topbar { flex-direction: column; align-items: flex-start; }
+}
+
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="topbar">
+      <div class="brand">
+        <div class="brand-badge">⚙️</div>
+        <div>
+          <div style="font-size:1.4rem;">STEAMLURAVI</div>
+          <small>Profesor virtual STEAM · Cádiz · micro:bit · pensamiento crítico</small>
+        </div>
+      </div>
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        Agente listo para clase
+      </div>
+    </div><section class="hero">
+  <div class="panel hero-copy">
+    <div class="eyebrow">🚀 Aula digital lista para tus alumnos</div>
+    <h1>La web de <span style="color: var(--accent);">STEAMLURAVI</span> ya está preparada.</h1>
+    <p>
+      Una interfaz clara, bonita y pensada para usar en clase. Puedes presentarla como profesor virtual,
+      plantear dudas, pedir explicaciones, proponer ejercicios y convertirla más adelante en la puerta de entrada
+      a tu agente publicado.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#chat">Abrir STEAMLURAVI</a>
+      <button class="btn btn-secondary" id="copyConfigBtn">Copiar configuración</button>
+    </div>
+    <div class="mini-grid">
+      <div class="mini-card">
+        <strong>Explica</strong>
+        <span>Conceptos de forma clara, escalonada y adaptada al nivel.</span>
+      </div>
+      <div class="mini-card">
+        <strong>Entrena</strong>
+        <span>Incluye ejemplos, ejercicios y retos con contexto cercano.</span>
+      </div>
+      <div class="mini-card">
+        <strong>Acompaña</strong>
+        <span>Está diseñado para guiar, no para regalar respuestas.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel hero-visual">
+    <div class="glass-card">
+      <div class="card-title">
+        <span>Qué puede hacer</span>
+        <span class="tag">STEAM</span>
+      </div>
+      <div class="feature-list">
+        <div class="feature-item"><div class="feature-icon">📘</div><div>Explicar Matemáticas, Ciencias, Tecnología, Ingeniería y Arte con lenguaje cercano.</div></div>
+        <div class="feature-item"><div class="feature-icon">🤖</div><div>Apoyar proyectos de micro:bit, MakeCode, sensores, algoritmia y robótica escolar.</div></div>
+        <div class="feature-item"><div class="feature-icon">🧠</div><div>Plantear ejercicios por niveles, preguntas de reflexión y retos con contexto real.</div></div>
+        <div class="feature-item"><div class="feature-icon">🌊</div><div>Usar ejemplos contextualizados en Cádiz: mar, viento, ciudad, clima y entorno.</div></div>
+      </div>
+    </div>
+    <div class="glass-card">
+      <div class="card-title">
+        <span>Modo de uso recomendado</span>
+        <span class="tag">Clase</span>
+      </div>
+      <div class="feature-list">
+        <div class="feature-item"><div class="feature-icon">1</div><div>Empieza con una duda real del alumnado.</div></div>
+        <div class="feature-item"><div class="feature-icon">2</div><div>Pide explicación + ejemplo + ejercicios.</div></div>
+        <div class="feature-item"><div class="feature-icon">3</div><div>Haz que el alumno responda y luego afina con nuevas pistas.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="layout">
+  <aside class="panel sidebar">
+    <h3>Configuración rápida</h3>
+    <div class="settings-group">
+      <div>
+        <label for="workflowId">Workflow ID</label>
+        <input id="workflowId" placeholder="Pega aquí tu wf_..." value="" />
+        <div class="hint">Copia el ID del flujo desde Agent Builder.</div>
+      </div>
+      <div>
+        <label for="workflowVersion">Versión</label>
+        <input id="workflowVersion" placeholder='Por ejemplo: 2 o latest' value="2" />
+        <div class="hint">Puedes fijar una versión concreta o usar la última desplegada.</div>
+      </div>
+      <div>
+        <label for="allowedDomain">Dominio permitido</label>
+        <input id="allowedDomain" placeholder="https://tuweb.com o localhost" value="" />
+        <div class="hint">Recuerda añadir este dominio en ChatKit antes de usar la integración real.</div>
+      </div>
+      <div>
+        <label for="teacherMode">Modo de clase</label>
+        <select id="teacherMode">
+          <option>Profesor virtual general</option>
+          <option>Micro:bit y robótica</option>
+          <option>Matemáticas y funciones</option>
+          <option>Retos y misiones STEAM</option>
+        </select>
+      </div>
+      <div>
+        <label for="notes">Notas para tus alumnos</label>
+        <textarea id="notes" placeholder="Ejemplo: Usa STEAMLURAVI para pedir explicación, ejemplo y 3 ejercicios. No copies sin pensar.">Usa STEAMLURAVI para pedir explicación, ejemplo y ejercicios. Piensa antes de copiar.</textarea>
+      </div>
+    </div>
+    <button class="btn btn-primary" style="width:100%;" id="saveBtn">Guardar datos en el navegador</button>
+    <div class="footer-note">
+      Esta plantilla funciona ya como presentación y demo. Para conectarla de verdad al agente publicado,
+      tendrás que completar la integración de ChatKit con un servidor de desarrollo y el dominio permitido.
+      <div style="margin-top:10px;">
+        <span class="code-chip">wf_...</span>
+        <span class="code-chip">version="2"</span>
+      </div>
+    </div>
+  </aside>
+
+  <main class="panel chat-wrap" id="chat">
+    <div class="chat-header">
+      <div class="chat-title">
+        <div class="avatar">SL</div>
+        <div>
+          <h3 style="margin:0;">Chat de STEAMLURAVI</h3>
+          <p>Demo visual preparada para tu futura integración con el agente en producción.</p>
+        </div>
+      </div>
+      <span class="tag" id="modeTag">Profesor virtual general</span>
+    </div>
+
+    <div class="messages" id="messages">
+      <div class="message bot">¡Hola! Soy <strong>STEAMLURAVI</strong>. Estoy listo para explicar, proponer ejercicios y ayudarte a pensar. Pídeme una explicación y te responderé en modo demo visual.</div>
+      <div class="message bot">Prueba algo como: <em>“Explícame qué es una función”</em> o <em>“Crea un ejercicio de micro:bit con el botón A”</em>.</div>
+    </div>
+
+    <div class="pill-row">
+      <button class="pill" data-prompt="Explícame qué es una función con ejemplo y 3 ejercicios.">Funciones</button>
+      <button class="pill" data-prompt="Explícame cómo programar micro:bit v2 y dame un ejemplo con el botón A.">micro:bit</button>
+      <button class="pill" data-prompt="Propón un reto STEAM sobre Cádiz con ciencia y tecnología.">Reto Cádiz</button>
+      <button class="pill" data-prompt="Hazme 3 ejercicios de matemáticas por niveles para 1º ESO.">1º ESO</button>
+    </div>
+
+    <div class="composer">
+      <textarea id="userInput" placeholder="Escribe aquí la duda del alumno o la consigna de clase..."></textarea>
+      <button class="btn btn-primary" id="sendBtn">Enviar</button>
+    </div>
+    <div class="footer-note">
+      Ahora mismo esta versión responde en <strong>modo demo local</strong> para que tengas la web lista y bonita.
+      Cuando quieras, el siguiente paso es conectar este frontend a ChatKit con tu <strong>workflow ID</strong> y tu
+      dominio permitido.
+    </div>
+  </main>
+</section>
+
+  </div>  <script>
+    const $ = (id) => document.getElementById(id);
+    const messages = $("messages");
+    const userInput = $("userInput");
+    const teacherMode = $("teacherMode");
+    const modeTag = $("modeTag");
+
+    const storageKeys = {
+      workflowId: "steamluravi.workflowId",
+      workflowVersion: "steamluravi.workflowVersion",
+      allowedDomain: "steamluravi.allowedDomain",
+      teacherMode: "steamluravi.teacherMode",
+      notes: "steamluravi.notes"
+    };
+
+    function appendMessage(text, role = "bot") {
+      const div = document.createElement("div");
+      div.className = `message ${role}`;
+      div.innerHTML = text;
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function demoResponse(prompt) {
+      const mode = teacherMode.value;
+      const clean = escapeHtml(prompt);
+
+      if (/micro:?bit|makecode|bot[oó]n a|javascript|js/i.test(prompt)) {
+        return `📘 <strong>EXPLICACIÓN</strong><br><br>
+        Programar <strong>micro:bit v2</strong> consiste en decirle qué debe hacer cuando ocurre algo: por ejemplo, al pulsar un botón.
+        En MakeCode puedes empezar con bloques y luego pasar a JavaScript.<br><br>
+        🧩 <strong>EJEMPLO</strong><br><br>
+        Si quieres que al pulsar el botón A aparezca <strong>OLA MUNDO</strong>, la idea es:<br>
+        1. Detectar el evento del botón A.<br>
+        2. Mostrar un texto en la pantalla LED.<br><br>
+        🧠 <strong>EJERCICIOS</strong><br>
+        1. Básico: cambia el mensaje por tu nombre.<br>
+        2. Medio: usa el botón B para mostrar otro texto.<br>
+        3. Avanzado: usa A+B para mostrar un icono y luego una palabra.<br><br>
+        ❓ <strong>PREGUNTA</strong><br>
+        ¿Quieres que te lo explique con bloques, con JavaScript o con pseudocódigo primero?`;
+      }
+
+      if (/funci[oó]n|matem[aá]ticas/i.test(prompt)) {
+        return `📘 <strong>EXPLICACIÓN</strong><br><br>
+        Una <strong>función</strong> es como una máquina: tú metes un número y la máquina te devuelve un resultado siguiendo siempre la misma regla.<br><br>
+        🧩 <strong>EJEMPLO</strong><br><br>
+        Si la máquina hace <strong>x + 3</strong>, entonces:<br>
+        • si metes 2, sale 5<br>
+        • si metes 10, sale 13<br><br>
+        🧠 <strong>EJERCICIOS</strong><br>
+        1. Básico: f(x)=x-2. ¿Cuánto vale f(6)?<br>
+        2. Medio: inventa una máquina que multiplique por 2 y luego sume 1.<br>
+        3. Avanzado: escribe una función que relacione número de entradas de cine y coste total.<br><br>
+        ❓ <strong>PREGUNTA</strong><br>
+        ¿Quieres que te lo explique como si fueras de 1º ESO o con un poco más de nivel?`;
+      }
+
+      return `📘 <strong>EXPLICACIÓN</strong><br><br>
+      Has escrito: <em>${clean}</em>.<br>
+      Esta web está lista como <strong>demo visual</strong> de STEAMLURAVI. Ahora mismo responde con una simulación bonita para que puedas usarla, enseñarla y seguir mejorándola.<br><br>
+      🧩 <strong>EJEMPLO</strong><br><br>
+      Si el alumno pregunta algo de ciencia, matemáticas o tecnología, STEAMLURAVI deberá explicar, poner un ejemplo y proponer ejercicios.<br><br>
+      🧠 <strong>EJERCICIOS</strong><br>
+      1. Pide una explicación de un concepto.<br>
+      2. Pide un ejemplo cotidiano de Cádiz.<br>
+      3. Pide tres ejercicios por niveles.<br><br>
+      ❓ <strong>PREGUNTA</strong><br>
+      ¿Quieres que el siguiente paso sea conectar esta misma web con tu agente publicado?`;
+    }
+
+    function sendMessage() {
+      const text = userInput.value.trim();
+      if (!text) return;
+      appendMessage(escapeHtml(text), "user");
+      userInput.value = "";
+      setTimeout(() => appendMessage(demoResponse(text), "bot"), 320);
+    }
+
+    function saveSettings() {
+      localStorage.setItem(storageKeys.workflowId, $("workflowId").value);
+      localStorage.setItem(storageKeys.workflowVersion, $("workflowVersion").value);
+      localStorage.setItem(storageKeys.allowedDomain, $("allowedDomain").value);
+      localStorage.setItem(storageKeys.teacherMode, teacherMode.value);
+      localStorage.setItem(storageKeys.notes, $("notes").value);
+      modeTag.textContent = teacherMode.value;
+      appendMessage("Configuración guardada en este navegador. La web ya conserva tu modo de clase y los campos de integración.", "bot");
+    }
+
+    f<!DOCTYPE html><html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STEAMLURAVI</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: rgba(15, 23, 42, 0.88);
+      --panel-2: rgba(30, 41, 59, 0.92);
+      --card: rgba(255,255,255,0.06);
+      --line: rgba(255,255,255,0.12);
+      --text: #e5eefb;
+      --muted: #a9b7cf;
+      --accent: #67e8f9;
+      --accent-2: #f59e0b;
+      --accent-3: #a78bfa;
+      --ok: #22c55e;
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --radius: 24px;
+    }* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(103, 232, 249, .16), transparent 28%),
+    radial-gradient(circle at top right, rgba(167, 139, 250, .14), transparent 24%),
+    linear-gradient(180deg, #020617 0%, #0f172a 50%, #111827 100%);
+  min-height: 100vh;
+}
+
+.shell {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 800;
+  letter-spacing: .02em;
+}
+
+.brand-badge {
+  width: 52px;
+  height: 52px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--accent), var(--accent-3));
+  color: #08111d;
+  font-size: 1.2rem;
+  box-shadow: var(--shadow);
+}
+
+.brand small {
+  display: block;
+  color: var(--muted);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255,255,255,.04);
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  background: var(--ok);
+  border-radius: 50%;
+  box-shadow: 0 0 0 6px rgba(34,197,94,.14);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+}
+
+.hero-copy {
+  padding: 36px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(245, 158, 11, .12);
+  border: 1px solid rgba(245, 158, 11, .28);
+  color: #fde68a;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+h1 {
+  margin: 0 0 14px;
+  font-size: clamp(2.2rem, 4vw, 4rem);
+  line-height: 1.03;
+  letter-spacing: -.03em;
+}
+
+.hero-copy p {
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.7;
+  margin: 0 0 24px;
+  max-width: 62ch;
+}
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.btn {
+  border: 0;
+  border-radius: 16px;
+  padding: 14px 18px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform .15s ease, opacity .15s ease, box-shadow .15s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn:hover { transform: translateY(-1px); }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-3));
+  color: #08111d;
+  box-shadow: 0 12px 32px rgba(103,232,249,.18);
+}
+
+.btn-secondary {
+  background: rgba(255,255,255,.06);
+  border: 1px solid var(--line);
+  color: var(--text);
+}
+
+.mini-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.mini-card {
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.04);
+}
+
+.mini-card strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: .98rem;
+}
+
+.mini-card span {
+  color: var(--muted);
+  font-size: .92rem;
+  line-height: 1.5;
+}
+
+.hero-visual {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+}
+
+.glass-card {
+  border-radius: 22px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  background: var(--panel-2);
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-weight: 800;
+}
+
+.tag {
+  font-size: .78rem;
+  color: #dbeafe;
+  background: rgba(103,232,249,.14);
+  border: 1px solid rgba(103,232,249,.24);
+  padding: 6px 10px;
+  border-radius: 999px;
+}
+
+.feature-list {
+  display: grid;
+  gap: 10px;
+}
+
+.feature-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.feature-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  background: rgba(255,255,255,.08);
+  color: white;
+  font-size: .95rem;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 24px;
+}
+
+.sidebar {
+  padding: 22px;
+  align-self: start;
+  position: sticky;
+  top: 24px;
+}
+
+.sidebar h3,
+.chat-wrap h3 {
+  margin: 0 0 14px;
+  font-size: 1.15rem;
+}
+
+.settings-group {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+label {
+  font-size: .9rem;
+  font-weight: 700;
+  color: #dbeafe;
+  display: block;
+  margin-bottom: 8px;
+}
+
+input, textarea, select {
+  width: 100%;
+  background: rgba(255,255,255,.05);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px 14px;
+  font: inherit;
+  outline: none;
+}
+
+textarea { min-height: 96px; resize: vertical; }
+
+.hint {
+  color: var(--muted);
+  font-size: .84rem;
+  line-height: 1.45;
+  margin-top: 6px;
+}
+
+.code-chip {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 10px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid var(--line);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .82rem;
+  color: #c7d2fe;
+}
+
+.chat-wrap {
+  padding: 22px;
+  min-height: 720px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.chat-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(103,232,249,.25), rgba(167,139,250,.25));
+  border: 1px solid rgba(255,255,255,.14);
+  font-size: 1.1rem;
+  font-weight: 900;
+}
+
+.chat-title p {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: .92rem;
+}
+
+.messages {
+  flex: 1;
+  display: grid;
+  gap: 14px;
+  align-content: start;
+  padding-right: 4px;
+  overflow: auto;
+  min-height: 460px;
+}
+
+.message {
+  max-width: 82%;
+  padding: 14px 16px;
+  border-radius: 18px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  box-shadow: 0 10px 24px rgba(0,0,0,.16);
+}
+
+.message.user {
+  margin-left: auto;
+  background: linear-gradient(135deg, rgba(103,232,249,.18), rgba(167,139,250,.18));
+  border: 1px solid rgba(103,232,249,.22);
+}
+
+.message.bot {
+  background: rgba(255,255,255,.05);
+  border: 1px solid var(--line);
+}
+
+.composer {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+}
+
+.composer textarea {
+  min-height: 74px;
+}
+
+.footer-note {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: .85rem;
+  line-height: 1.55;
+}
+
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.pill {
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.04);
+  color: var(--muted);
+  font-size: .86rem;
+  cursor: pointer;
+}
+
+.pill:hover { color: var(--text); border-color: rgba(255,255,255,.2); }
+
+@media (max-width: 1100px) {
+  .hero, .layout { grid-template-columns: 1fr; }
+  .sidebar { position: static; }
+}
+
+@media (max-width: 720px) {
+  .shell { padding: 16px; }
+  .hero-copy, .chat-wrap, .sidebar { padding: 18px; }
+  .mini-grid { grid-template-columns: 1fr; }
+  .message { max-width: 100%; }
+  .composer { grid-template-columns: 1fr; }
+  .topbar { flex-direction: column; align-items: flex-start; }
+}
+
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="topbar">
+      <div class="brand">
+        <div class="brand-badge">⚙️</div>
+        <div>
+          <div style="font-size:1.4rem;">STEAMLURAVI</div>
+          <small>Profesor virtual STEAM · Cádiz · micro:bit · pensamiento crítico</small>
+        </div>
+      </div>
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        Agente listo para clase
+      </div>
+    </div><section class="hero">
+  <div class="panel hero-copy">
+    <div class="eyebrow">🚀 Aula digital lista para tus alumnos</div>
+    <h1>La web de <span style="color: var(--accent);">STEAMLURAVI</span> ya está preparada.</h1>
+    <p>
+      Una interfaz clara, bonita y pensada para usar en clase. Puedes presentarla como profesor virtual,
+      plantear dudas, pedir explicaciones, proponer ejercicios y convertirla más adelante en la puerta de entrada
+      a tu agente publicado.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#chat">Abrir STEAMLURAVI</a>
+      <button class="btn btn-secondary" id="copyConfigBtn">Copiar configuración</button>
+    </div>
+    <div class="mini-grid">
+      <div class="mini-card">
+        <strong>Explica</strong>
+        <span>Conceptos de forma clara, escalonada y adaptada al nivel.</span>
+      </div>
+      <div class="mini-card">
+        <strong>Entrena</strong>
+        <span>Incluye ejemplos, ejercicios y retos con contexto cercano.</span>
+      </div>
+      <div class="mini-card">
+        <strong>Acompaña</strong>
+        <span>Está diseñado para guiar, no para regalar respuestas.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel hero-visual">
+    <div class="glass-card">
+      <div class="card-title">
+        <span>Qué puede hacer</span>
+        <span class="tag">STEAM</span>
+      </div>
+      <div class="feature-list">
+        <div class="feature-item"><div class="feature-icon">📘</div><div>Explicar Matemáticas, Ciencias, Tecnología, Ingeniería y Arte con lenguaje cercano.</div></div>
+        <div class="feature-item"><div class="feature-icon">🤖</div><div>Apoyar proyectos de micro:bit, MakeCode, sensores, algoritmia y robótica escolar.</div></div>
+        <div class="feature-item"><div class="feature-icon">🧠</div><div>Plantear ejercicios por niveles, preguntas de reflexión y retos con contexto real.</div></div>
+        <div class="feature-item"><div class="feature-icon">🌊</div><div>Usar ejemplos contextualizados en Cádiz: mar, viento, ciudad, clima y entorno.</div></div>
+      </div>
+    </div>
+    <div class="glass-card">
+      <div class="card-title">
+        <span>Modo de uso recomendado</span>
+        <span class="tag">Clase</span>
+      </div>
+      <div class="feature-list">
+        <div class="feature-item"><div class="feature-icon">1</div><div>Empieza con una duda real del alumnado.</div></div>
+        <div class="feature-item"><div class="feature-icon">2</div><div>Pide explicación + ejemplo + ejercicios.</div></div>
+        <div class="feature-item"><div class="feature-icon">3</div><div>Haz que el alumno responda y luego afina con nuevas pistas.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="layout">
+  <aside class="panel sidebar">
+    <h3>Configuración rápida</h3>
+    <div class="settings-group">
+      <div>
+        <label for="workflowId">Workflow ID</label>
+        <input id="workflowId" placeholder="Pega aquí tu wf_..." value="" />
+        <div class="hint">Copia el ID del flujo desde Agent Builder.</div>
+      </div>
+      <div>
+        <label for="workflowVersion">Versión</label>
+        <input id="workflowVersion" placeholder='Por ejemplo: 2 o latest' value="2" />
+        <div class="hint">Puedes fijar una versión concreta o usar la última desplegada.</div>
+      </div>
+      <div>
+        <label for="allowedDomain">Dominio permitido</label>
+        <input id="allowedDomain" placeholder="https://tuweb.com o localhost" value="" />
+        <div class="hint">Recuerda añadir este dominio en ChatKit antes de usar la integración real.</div>
+      </div>
+      <div>
+        <label for="teacherMode">Modo de clase</label>
+        <select id="teacherMode">
+          <option>Profesor virtual general</option>
+          <option>Micro:bit y robótica</option>
+          <option>Matemáticas y funciones</option>
+          <option>Retos y misiones STEAM</option>
+        </select>
+      </div>
+      <div>
+        <label for="notes">Notas para tus alumnos</label>
+        <textarea id="notes" placeholder="Ejemplo: Usa STEAMLURAVI para pedir explicación, ejemplo y 3 ejercicios. No copies sin pensar.">Usa STEAMLURAVI para pedir explicación, ejemplo y ejercicios. Piensa antes de copiar.</textarea>
+      </div>
+    </div>
+    <button class="btn btn-primary" style="width:100%;" id="saveBtn">Guardar datos en el navegador</button>
+    <div class="footer-note">
+      Esta plantilla funciona ya como presentación y demo. Para conectarla de verdad al agente publicado,
+      tendrás que completar la integración de ChatKit con un servidor de desarrollo y el dominio permitido.
+      <div style="margin-top:10px;">
+        <span class="code-chip">wf_...</span>
+        <span class="code-chip">version="2"</span>
+      </div>
+    </div>
+  </aside>
+
+  <main class="panel chat-wrap" id="chat">
+    <div class="chat-header">
+      <div class="chat-title">
+        <div class="avatar">SL</div>
+        <div>
+          <h3 style="margin:0;">Chat de STEAMLURAVI</h3>
+          <p>Demo visual preparada para tu futura integración con el agente en producción.</p>
+        </div>
+      </div>
+      <span class="tag" id="modeTag">Profesor virtual general</span>
+    </div>
+
+    <div class="messages" id="messages">
+      <div class="message bot">¡Hola! Soy <strong>STEAMLURAVI</strong>. Estoy listo para explicar, proponer ejercicios y ayudarte a pensar. Pídeme una explicación y te responderé en modo demo visual.</div>
+      <div class="message bot">Prueba algo como: <em>“Explícame qué es una función”</em> o <em>“Crea un ejercicio de micro:bit con el botón A”</em>.</div>
+    </div>
+
+    <div class="pill-row">
+      <button class="pill" data-prompt="Explícame qué es una función con ejemplo y 3 ejercicios.">Funciones</button>
+      <button class="pill" data-prompt="Explícame cómo programar micro:bit v2 y dame un ejemplo con el botón A.">micro:bit</button>
+      <button class="pill" data-prompt="Propón un reto STEAM sobre Cádiz con ciencia y tecnología.">Reto Cádiz</button>
+      <button class="pill" data-prompt="Hazme 3 ejercicios de matemáticas por niveles para 1º ESO.">1º ESO</button>
+    </div>
+
+    <div class="composer">
+      <textarea id="userInput" placeholder="Escribe aquí la duda del alumno o la consigna de clase..."></textarea>
+      <button class="btn btn-primary" id="sendBtn">Enviar</button>
+    </div>
+    <div class="footer-note">
+      Ahora mismo esta versión responde en <strong>modo demo local</strong> para que tengas la web lista y bonita.
+      Cuando quieras, el siguiente paso es conectar este frontend a ChatKit con tu <strong>workflow ID</strong> y tu
+      dominio permitido.
+    </div>
+  </main>
+</section>
+
+  </div>  <script>
+    const $ = (id) => document.getElementById(id);
+    const messages = $("messages");
+    const userInput = $("userInput");
+    const teacherMode = $("teacherMode");
+    const modeTag = $("modeTag");
+
+    const storageKeys = {
+      workflowId: "steamluravi.workflowId",
+      workflowVersion: "steamluravi.workflowVersion",
+      allowedDomain: "steamluravi.allowedDomain",
+      teacherMode: "steamluravi.teacherMode",
+      notes: "steamluravi.notes"
+    };
+
+    function appendMessage(text, role = "bot") {
+      const div = document.createElement("div");
+      div.className = `message ${role}`;
+      div.innerHTML = text;
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function demoResponse(prompt) {
+      const mode = teacherMode.value;
+      const clean = escapeHtml(prompt);
+
+      if (/micro:?bit|makecode|bot[oó]n a|javascript|js/i.test(prompt)) {
+        return `📘 <strong>EXPLICACIÓN</strong><br><br>
+        Programar <strong>micro:bit v2</strong> consiste en decirle qué debe hacer cuando ocurre algo: por ejemplo, al pulsar un botón.
+        En MakeCode puedes empezar con bloques y luego pasar a JavaScript.<br><br>
+        🧩 <strong>EJEMPLO</strong><br><br>
+        Si quieres que al pulsar el botón A aparezca <strong>OLA MUNDO</strong>, la idea es:<br>
+        1. Detectar el evento del botón A.<br>
+        2. Mostrar un texto en la pantalla LED.<br><br>
+        🧠 <strong>EJERCICIOS</strong><br>
+        1. Básico: cambia el mensaje por tu nombre.<br>
+        2. Medio: usa el botón B para mostrar otro texto.<br>
+        3. Avanzado: usa A+B para mostrar un icono y luego una palabra.<br><br>
+        ❓ <strong>PREGUNTA</strong><br>
+        ¿Quieres que te lo explique con bloques, con JavaScript o con pseudocódigo primero?`;
+      }
+
+      if (/funci[oó]n|matem[aá]ticas/i.test(prompt)) {
+        return `📘 <strong>EXPLICACIÓN</strong><br><br>
+        Una <strong>función</strong> es como una máquina: tú metes un número y la máquina te devuelve un resultado siguiendo siempre la misma regla.<br><br>
+        🧩 <strong>EJEMPLO</strong><br><br>
+        Si la máquina hace <strong>x + 3</strong>, entonces:<br>
+        • si metes 2, sale 5<br>
+        • si metes 10, sale 13<br><br>
+        🧠 <strong>EJERCICIOS</strong><br>
+        1. Básico: f(x)=x-2. ¿Cuánto vale f(6)?<br>
+        2. Medio: inventa una máquina que multiplique por 2 y luego sume 1.<br>
+        3. Avanzado: escribe una función que relacione número de entradas de cine y coste total.<br><br>
+        ❓ <strong>PREGUNTA</strong><br>
+        ¿Quieres que te lo explique como si fueras de 1º ESO o con un poco más de nivel?`;
+      }
+
+      return `📘 <strong>EXPLICACIÓN</strong><br><br>
+      Has escrito: <em>${clean}</em>.<br>
+      Esta web está lista como <strong>demo visual</strong> de STEAMLURAVI. Ahora mismo responde con una simulación bonita para que puedas usarla, enseñarla y seguir mejorándola.<br><br>
+      🧩 <strong>EJEMPLO</strong><br><br>
+      Si el alumno pregunta algo de ciencia, matemáticas o tecnología, STEAMLURAVI deberá explicar, poner un ejemplo y proponer ejercicios.<br><br>
+      🧠 <strong>EJERCICIOS</strong><br>
+      1. Pide una explicación de un concepto.<br>
+      2. Pide un ejemplo cotidiano de Cádiz.<br>
+      3. Pide tres ejercicios por niveles.<br><br>
+      ❓ <strong>PREGUNTA</strong><br>
+      ¿Quieres que el siguiente paso sea conectar esta misma web con tu agente publicado?`;
+    }
+
+    function sendMessage() {
+      const text = userInput.value.trim();
+      if (!text) return;
+      appendMessage(escapeHtml(text), "user");
+      userInput.value = "";
+      setTimeout(() => appendMessage(demoResponse(text), "bot"), 320);
+    }
+
+    function saveSettings() {
+      localStorage.setItem(storageKeys.workflowId, $("workflowId").value);
+      localStorage.setItem(storageKeys.workflowVersion, $("workflowVersion").value);
+      localStorage.setItem(storageKeys.allowedDomain, $("allowedDomain").value);
+      localStorage.setItem(storageKeys.teacherMode, teacherMode.value);
+      localStorage.setItem(storageKeys.notes, $("notes").value);
+      modeTag.textContent = teacherMode.value;
+      appendMessage("Configuración guardada en este navegador. La web ya conserva tu modo de clase y los campos de integración.", "bot");
+    }
+
+    f
